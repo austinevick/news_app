@@ -8,53 +8,47 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        InkWell(
-          onTap: () => showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              content: const Text('Are you sure you want to log out?'),
-              title: const Text('Log out'),
-              actions: [
-                TextButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: const Text('NO')),
-                TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      AuthProvider.logOut();
-                    },
-                    child: const Text('YES'))
-              ],
-            ),
+    return SliverAppBar(
+      floating: true,
+      backgroundColor: Colors.white,
+      leading: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          height: 45,
+          child: const Icon(
+            Icons.person_outline,
+            size: 28,
+            color: Colors.white,
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 45,
-              child: const Icon(
-                Icons.person_outline,
-                size: 28,
-                color: Colors.white,
-              ),
-              width: 45,
-              decoration: BoxDecoration(
-                  color: Colors.blue.withOpacity(0.5),
-                  borderRadius: BorderRadius.circular(10)),
-            ),
-          ),
+          width: 45,
+          decoration: BoxDecoration(
+              color: Colors.blue.withOpacity(0.5),
+              borderRadius: BorderRadius.circular(10)),
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text('Welcome Back!',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-            Text(DateFormat.yMMMd().format(DateTime.now()))
-          ],
-        ),
-        const Spacer(),
+      ),
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('Welcome Back!',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18)),
+          Text(DateFormat.yMMMd().format(DateTime.now()),
+              style: const TextStyle(
+                  color: Colors.grey,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15))
+        ],
+      ),
+      actions: [
+        IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.search,
+              color: Colors.black,
+              size: 32,
+            ))
       ],
     );
   }

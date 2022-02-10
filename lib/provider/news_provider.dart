@@ -12,26 +12,15 @@ final newsProvider = Provider((ref) {
 class NewsProvider {
   NewsRemoteDataSource source = NewsRemoteDataSourceImpl();
 
-  static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  static final CollectionReference _mainCollection = _firestore
-      .collection('news')
-      .doc(AuthProvider.user!.uid)
-      .collection('articles');
-
   Future<List<News>> getTopHeadlines() async {
     return await source.getTopHeadlines();
   }
 
-  static Stream<QuerySnapshot> getStream() {
-    return _mainCollection.snapshots();
+  Future<List<News>> getNewsBySearchKey(String query) async {
+    return await source.getNewsBySearchKey(query);
   }
 
-  static Future<void> addNote(News news) async {
-    if (news.title!.isEmpty && news.content!.isEmpty) return;
-    await _mainCollection.doc().set(news.toMap());
-  }
-
-  static Future<void> deleteNote(String id) async {
-    await _mainCollection.doc(id).delete();
+  Future<List<News>> getNewsCategory() async {
+    return await source.getNewsCategory();
   }
 }

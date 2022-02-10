@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app/model/news.dart';
 import 'package:news_app/provider/news_provider.dart';
+import 'package:news_app/screens/news_webview_screen.dart';
 
 class DetailScreen extends StatefulWidget {
   final News? article;
@@ -53,7 +54,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 bottom: 0,
                 left: 0,
                 right: 0,
-                height: MediaQuery.of(context).size.height / 1.8,
+                height: MediaQuery.of(context).size.height / 1.6,
                 child: Container(
                   decoration: const BoxDecoration(
                       color: Colors.white,
@@ -75,29 +76,6 @@ class _DetailScreenState extends State<DetailScreen> {
                                   fontWeight: FontWeight.w600,
                                   color: Colors.grey),
                             ),
-                            IconButton(
-                                onPressed: () {
-                                  final news = News(
-                                      title: widget.article!.title!,
-                                      content: widget.article!.content,
-                                      publishedAt: widget.article!.publishedAt,
-                                      urlToImage: widget.article!.urlToImage,
-                                      description: widget.article!.description);
-                                  if (widget.id!.isEmpty) {
-                                    NewsProvider.addNote(news);
-                                  }
-                                  NewsProvider.deleteNote(id);
-                                },
-                                icon: widget.id!.isNotEmpty
-                                    ? const Icon(
-                                        Icons.favorite,
-                                        color: Colors.red,
-                                        size: 28,
-                                      )
-                                    : const Icon(
-                                        Icons.favorite_border,
-                                        size: 28,
-                                      )),
                           ],
                         ),
                         Align(
@@ -120,7 +98,29 @@ class _DetailScreenState extends State<DetailScreen> {
                           widget.article!.description!,
                           style: const TextStyle(
                               fontSize: 15, fontWeight: FontWeight.w600),
-                        )
+                        ),
+                        const SizedBox(height: 20),
+                        MaterialButton(
+                            height: 50,
+                            minWidth: 200,
+                            shape: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: Colors.grey, width: 2),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (ctx) => NewsWebviewScreen(
+                                        url: widget.article!.url,
+                                      )));
+                            },
+                            child: const Text(
+                              'Read more',
+                              style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600),
+                            ))
                       ],
                     ),
                   ),

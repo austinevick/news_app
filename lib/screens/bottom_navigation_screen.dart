@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/screens/favourite_news_screen.dart';
 import 'package:news_app/screens/home_screen.dart';
 
 class BottomNavigationScreen extends StatefulWidget {
@@ -10,7 +9,7 @@ class BottomNavigationScreen extends StatefulWidget {
 }
 
 class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
-  final screens = [const HomeScreen(), const FavouriteNewsScreen()];
+  final screens = [const HomeScreen(), const Scaffold()];
   int index = 0;
   @override
   Widget build(BuildContext context) {

@@ -12,7 +12,7 @@ class NewsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => Navigator.of(context).push(PageRouteBuilder(
-          transitionDuration: const Duration(milliseconds: 850),
+          transitionDuration: const Duration(milliseconds: 400),
           pageBuilder: (_, __, ___) =>
               DetailScreen(article: articles, id: id))),
       child: Padding(

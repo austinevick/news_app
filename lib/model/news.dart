@@ -8,7 +8,11 @@ class News {
   final String? content;
   final String? url;
   final String? author;
+  final String? name;
+  final String? category;
   News({
+    this.name,
+    this.category,
     this.title,
     this.author,
     this.description,
@@ -27,6 +31,8 @@ class News {
       'author': author,
       'content': content,
       'url': url,
+      'name': name,
+      'category': category
     };
   }
 
@@ -36,12 +42,15 @@ class News {
       author: map['author'] ?? '',
       description: map['description'] ?? '',
       urlToImage: map['urlToImage'] ?? '',
+      name: map['name'] ?? '',
+      category: map['category'],
       publishedAt:
           Timestamp.fromDate(DateTime.parse((map['publishedAt'] ?? ''))),
       content: map['content'] ?? '',
       url: map['url'],
     );
   }
+
   factory News.fromSnapshot(Map<String, dynamic> map) {
     return News(
       title: map['title'] ?? '',
@@ -49,6 +58,8 @@ class News {
       description: map['description'] ?? '',
       urlToImage: map['urlToImage'] ?? '',
       publishedAt: map['publishedAt'] ?? '',
+      name: map['name'] ?? '',
+      category: map['category'],
       content: map['content'] ?? '',
       url: map['url'],
     );
